@@ -1,0 +1,6 @@
+-----Student-----
+Name: gh
+Group:  4
+Specialty:  gfh
+Course:  3
+Average Grade:  2
