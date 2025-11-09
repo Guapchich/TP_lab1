@@ -12,23 +12,19 @@
 using namespace std;
 
 int main() {
-    setlocale(LC_ALL, "Russian");
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-    
     Keeper keeper;
     char command = 0;
     
     while (command != '7') {
         system("cls");
-        cout << "------Меню------" << endl;
-        cout << "1. Добавить запись" << endl;
-        cout << "2. Изменить запись" << endl;
-        cout << "3. Удалить запись" << endl;
-        cout << "4. Показать содержимое контейнера" << endl;
-        cout << "5. Сохранить в файл" << endl;
-        cout << "6. Считать из файла" << endl;
-        cout << "7. Закрыть программу" << endl;
+        cout << "------Menu------" << endl;
+        cout << "1. Add record" << endl;
+        cout << "2. Modify record" << endl;
+        cout << "3. Delete record" << endl;
+        cout << "4. Show container contents" << endl;
+        cout << "5. Save to file" << endl;
+        cout << "6. Load from file" << endl;
+        cout << "7. Close program" << endl;
         cin >> command;
         system("cls");
         
@@ -38,10 +34,10 @@ int main() {
                 char command2 = 0;
                 
                 while (command2 <= '0' || command2 >= '5') {
-                    cout << "1. Добавить студента" << endl;
-                    cout << "2. Добавить преподавателя" << endl;
-                    cout << "3. Добавить администратора" << endl;
-                    cout << "4. Выйти в главное меню" << endl;
+                    cout << "1. Add student" << endl;
+                    cout << "2. Add teacher" << endl;
+                    cout << "3. Add administrator" << endl;
+                    cout << "4. Return to main menu" << endl;
                     cin >> command2;
                 }
                 
@@ -52,7 +48,7 @@ int main() {
                         Student* a = new Student();
                         a->input();
                         system("cls");
-                        cout << "-----Добавленный Студент-----" << endl;
+                        cout << "-----Added Student-----" << endl;
                         keeper.addUniversity(a);
                         a->print();
                         system("pause");
@@ -64,7 +60,7 @@ int main() {
                         Mentor* a = new Mentor();
                         a->input();
                         system("cls");
-                        cout << "-----Добавленный Преподаватель-----" << endl;
+                        cout << "-----Added Teacher-----" << endl;
                         keeper.addUniversity(a);
                         a->print();
                         system("pause");
@@ -75,7 +71,7 @@ int main() {
                         Admin* a = new Admin();
                         a->input();
                         system("cls");
-                        cout << "-----Добавленный Администратор-----" << endl;
+                        cout << "-----Added Administrator-----" << endl;
                         keeper.addUniversity(a);
                         a->print();
                         system("pause");
@@ -110,7 +106,7 @@ int main() {
             case '5': {
                 system("cls");
                 string fileName;
-                cout << "Введите желаемое название файла: ";
+                cout << "Enter desired file name: ";
                 cin >> fileName;
                 system("cls");
                 keeper.save(fileName);
@@ -122,7 +118,7 @@ int main() {
             case '6': {
                 system("cls");
                 string fileName;
-                cout << "Введите название файла: ";
+                cout << "Enter file name: ";
                 cin >> fileName;
                 system("cls");
                 keeper.load(fileName);
@@ -132,7 +128,7 @@ int main() {
             }
             
             default: {
-                // Пустой блок для default case
+                // Empty block for default case
             }
         }
     }

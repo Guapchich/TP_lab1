@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 #include <iostream>
 #include <locale.h>
@@ -12,7 +11,7 @@ using namespace std;
 
 Mentor::Mentor(const Mentor& new_Mentor)
 {
-    cout << "Вызван конструктор копирования" << endl;
+    cout << "Copy constructor called" << endl;
     FIO = new_Mentor.FIO;
     groups[gr_size] = new_Mentor.groups[gr_size];
     objects[obj_size] = new_Mentor.objects[obj_size];
@@ -20,19 +19,19 @@ Mentor::Mentor(const Mentor& new_Mentor)
 
 Mentor::Mentor()
 {
-    cout << "Вызван конструктор по умолчанию м" << endl;
+    cout << "Default constructor called" << endl;
     this->FIO = "None";
     for (int i = 0; i < gr_size; ++i) {
-        groups[i] = "None";  // Задаем пустую строку
+        groups[i] = "None";  // Set empty string
     }
     for (int i = 0; i < obj_size; ++i) {
-        objects[i] = "None"; // Задаем пустую строку
+        objects[i] = "None"; // Set empty string
     }
 }
 
 Mentor::Mentor(string FIO, int gr_size, int obj_size, string* groups, string* objects)
 {
-    cout << "Вызван конструктор" << endl;
+    cout << "Constructor called" << endl;
     this->FIO = FIO;
     this->groups[gr_size] = groups[gr_size];
     this->objects[obj_size] = objects[obj_size];
@@ -40,7 +39,7 @@ Mentor::Mentor(string FIO, int gr_size, int obj_size, string* groups, string* ob
 
 Mentor::~Mentor()
 {
-    cout << "Вызван деструктор" << endl;
+    cout << "Destructor called" << endl;
 }
 
 void Mentor::setFIO(string FIO) { this->FIO = FIO; }
@@ -49,7 +48,7 @@ void Mentor::setGroup(int gr_size)
 {
     for (int i = 0; i < gr_size; i++) {
         string new_gr;
-        cout << "Введите группу №" << i + 1 << ":" << endl;
+        cout << "Enter group #" << i + 1 << ":" << endl;
         cin >> new_gr;
         groups[i] = new_gr;
     }
@@ -69,7 +68,7 @@ void Mentor::setObj(int obj_size)
 {
     for (int i = 0; i < obj_size; i++) {
         string new_obj;
-        cout << "Введите предмет №" << i + 1 << ":" << endl;
+        cout << "Enter subject #" << i + 1 << ":" << endl;
         cin >> new_obj;
         objects[i] = new_obj;
     }
@@ -84,7 +83,7 @@ void Mentor::getGroup()
     int i = 0;
     cout << groups[i] << endl;
     while (groups[i] != "None") {
-        cout << "Группа №" << i + 1 << ": " << groups[i] << endl;
+        cout << "Group #" << i + 1 << ": " << groups[i] << endl;
         i++;
     }
     return;
@@ -96,7 +95,7 @@ void Mentor::getObj()
 {
     int i = 0;
     while (objects[i] != "None") {
-        cout << "Предмет №" << i + 1 << ": " << objects[i] << endl;
+        cout << "Subject #" << i + 1 << ": " << objects[i] << endl;
         i++;
     }
     return;
@@ -105,8 +104,8 @@ void Mentor::getObj()
 void Mentor::print()
 {
     int i = 0;
-    cout << "-----Преподаватель-----" << endl;
-    cout << "ФИО: " << getFIO() << endl;
+    cout << "-----Teacher-----" << endl;
+    cout << "Full Name: " << getFIO() << endl;
     getGroup();
     getObj();
 }
@@ -118,14 +117,14 @@ void Mentor::input()
     string nobj_size;
     int number = 0;
 
-    cout << " Введите ФИО: " << endl;
+    cout << " Enter Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
     }
     setFIO(nFIO);
 
-    cout << "Введите количество групп( не больше 10): " << endl;
+    cout << "Enter number of groups (no more than 10): " << endl;
     cin >> ngr_size;
     try {
         number = stoi(ngr_size);
@@ -137,7 +136,7 @@ void Mentor::input()
         setGroup(number);
     }
 
-    cout << "Введите количество предметов( не больше 10): " << endl;
+    cout << "Enter number of subjects (no more than 10): " << endl;
     cin >> nobj_size;
     try {
         number = stoi(nobj_size);
@@ -157,8 +156,8 @@ void Mentor::change()
     string nobj_size;
     int number = 0;
 
-    cout << " Для отмены изменения введите 'N'" << endl;
-    cout << " Введите новое ФИО: " << endl;
+    cout << " Enter 'N' to cancel changes" << endl;
+    cout << " Enter new Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
@@ -168,7 +167,7 @@ void Mentor::change()
         setFIO(nFIO);
     }
 
-    cout << "Введите новое число групп(Не больше 10): " << endl;
+    cout << "Enter new number of groups (No more than 10): " << endl;
     cin >> ngr_size;
     if (ngr_size == "N") {
     } else {
@@ -183,7 +182,7 @@ void Mentor::change()
         }
     }
 
-    cout << "Введите новое число предметов (Не больше 10): " << endl;
+    cout << "Enter new number of subjects (No more than 10): " << endl;
     cin >> nobj_size;
     if (ngr_size == "N") {
     } else {
@@ -202,13 +201,13 @@ void Mentor::change()
 
 void Mentor::save(ofstream& file)
 {
-    file << "-----Преподаватель-----" << endl;
-    file << "ФИО: " << getFIO() << endl;
+    file << "-----Teacher-----" << endl;
+    file << "Full Name: " << getFIO() << endl;
     for (int i = 0; i < getGr_size(); i++) {
-        file << "Группа №" << i + 1 << ": " << groups[i] << endl;
+        file << "Group #" << i + 1 << ": " << groups[i] << endl;
     }
     for (int i = 0; i < getObj_size(); i++) {
-        file << "Предмет №" << i + 1 << ": " << objects[i] << endl;
+        file << "Subject #" << i + 1 << ": " << objects[i] << endl;
     }
 }
 

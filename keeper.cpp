@@ -33,9 +33,9 @@ void Keeper::save(string filename) {
             current = current->next;
         }
         file.close();
-        cout << "Keeper записан в файл!" << endl;
+        cout << "Keeper saved to file!" << endl;
     } else {
-        cout << "Ошибка открытия файла" << endl;
+        cout << "File opening error" << endl;
     }
 }
 
@@ -44,13 +44,13 @@ void Keeper::load(string filename) {
     ifstream file(filename);
     
     if (!file.is_open()) {
-        cout << "Ошибка открытия файла" << endl;
+        cout << "File opening error" << endl;
         return;
     }
     
-    cout << "Файл открыт" << endl;
-    cout << "При загрузке данных из файла, текущие внесенные вами данные будут очищены. "
-         << "Вы хотите продолжить?\n1 - Да\n2 - Выйти в меню" << endl;
+    cout << "File opened" << endl;
+    cout << "When loading data from file, your current entered data will be cleared. "
+         << "Do you want to continue?\n1 - Yes\n2 - Return to menu" << endl;
     cin >> answer;
     
     if (answer == 2) {
@@ -58,7 +58,7 @@ void Keeper::load(string filename) {
     }
     
     if (answer != 1 && answer != 2) {
-        cout << "Неверное значение. Попробуйте снова";
+        cout << "Invalid value. Please try again";
         return;
     }
     
@@ -68,11 +68,11 @@ void Keeper::load(string filename) {
     while (file >> type) {
         University* unit = nullptr;
         
-        if (type == "-----Студент-----")
+        if (type == "-----Student-----")
             unit = new Student();
-        else if (type == "-----Преподаватель-----")
+        else if (type == "-----Teacher-----")
             unit = new Mentor();
-        else if (type == "-----Администратор-----")
+        else if (type == "-----Administrator-----")
             unit = new Admin();
             
         if (unit) {
@@ -83,7 +83,7 @@ void Keeper::load(string filename) {
     
     file.close();
     system("cls");
-    cout << "Список ВУЗА успешно загружен из файла." << endl;
+    cout << "University list successfully loaded from file." << endl;
 }
 
 void Keeper::removeUniversity() {
@@ -93,16 +93,16 @@ void Keeper::removeUniversity() {
     LNode* prev = nullptr;
     
     while (command != '4') {
-        cout << "Кого вы хотите удалить?\n"
-             << "1. Студент\n"
-             << "2. Преподаватель\n"
-             << "3. Администратор\n"
-             << "4. Выход\n";
+        cout << "Who do you want to remove?\n"
+             << "1. Student\n"
+             << "2. Teacher\n"
+             << "3. Administrator\n"
+             << "4. Exit\n";
         cin >> command;
         
         switch (command) {
             case '1': {
-                cout << "Введите ФИО студента: ";
+                cout << "Enter student's full name: ";
                 getline(cin, FIOstudent);
                 if (FIOstudent == "") {
                     getline(cin, FIOstudent);
@@ -111,18 +111,18 @@ void Keeper::removeUniversity() {
                 while (current != nullptr) {
                     Student* student = dynamic_cast<Student*>(current->university);
                     if (student != nullptr && student->getFIO() == FIOstudent) {
-                        // Если Студент найден
+                        // If Student found
                         if (prev == nullptr) {
-                            // Удаляем первый элемент
+                            // Remove first element
                             universityList.setHead(current->next);
                         } else {
-                            // Переходим к следующему элементу
+                            // Move to next element
                             prev->next = current->next;
                         }
                         
-                        delete current->university; // Удаляем объект
-                        delete current; // Удаляем узел
-                        cout << "Студент с ФИО " << FIOstudent << " успешно удален." << endl;
+                        delete current->university; // Delete object
+                        delete current; // Delete node
+                        cout << "Student with full name " << FIOstudent << " successfully removed." << endl;
                         return;
                     }
                     prev = current;
@@ -132,7 +132,7 @@ void Keeper::removeUniversity() {
             }
             
             case '2': {
-                cout << "Введите ФИО преподавателя: ";
+                cout << "Enter teacher's full name: ";
                 getline(cin, FIOmentor);
                 if (FIOmentor == "") {
                     getline(cin, FIOmentor);
@@ -141,18 +141,18 @@ void Keeper::removeUniversity() {
                 while (current != nullptr) {
                     Mentor* mentor = dynamic_cast<Mentor*>(current->university);
                     if (mentor != nullptr && mentor->getFIO() == FIOmentor) {
-                        // Если Преподаватель найден
+                        // If Teacher found
                         if (prev == nullptr) {
-                            // Удаляем первый элемент
+                            // Remove first element
                             universityList.setHead(current->next);
                         } else {
-                            // Переходим к следующему
+                            // Move to next
                             prev->next = current->next;
                         }
                         
-                        delete current->university; // Удаляем объект
-                        delete current; // Удаляем узел
-                        cout << "Преподаватель с ФИО " << FIOmentor << " успешно удален." << endl;
+                        delete current->university; // Delete object
+                        delete current; // Delete node
+                        cout << "Teacher with full name " << FIOmentor << " successfully removed." << endl;
                         return;
                     }
                     prev = current;
@@ -162,7 +162,7 @@ void Keeper::removeUniversity() {
             }
             
             case '3': {
-                cout << "Введите ФИО Администратора: ";
+                cout << "Enter administrator's full name: ";
                 getline(cin, FIOadmin);
                 if (FIOadmin == "") {
                     getline(cin, FIOadmin);
@@ -171,18 +171,18 @@ void Keeper::removeUniversity() {
                 while (current != nullptr) {
                     Admin* admin = dynamic_cast<Admin*>(current->university);
                     if (admin != nullptr && admin->getFIO() == FIOadmin) {
-                        // Если Администратор найден
+                        // If Administrator found
                         if (prev == nullptr) {
-                            // Удаляем первый элемент
+                            // Remove first element
                             universityList.setHead(current->next);
                         } else {
-                            // Переходим к следующему
+                            // Move to next
                             prev->next = current->next;
                         }
                         
-                        delete current->university; // Удаляем объект Администратора
-                        delete current; // Удаляем узел
-                        cout << "Администратор с ФИО " << FIOadmin << " успешно удален." << endl;
+                        delete current->university; // Delete Administrator object
+                        delete current; // Delete node
+                        cout << "Administrator with full name " << FIOadmin << " successfully removed." << endl;
                         return;
                     }
                     prev = current;
@@ -207,11 +207,11 @@ void Keeper::changeUniversity() {
     LNode* prev = nullptr;
     
     while (command != '4') {
-        cout << "Кого вы хотите изменить?\n"
-             << "1. Студент\n"
-             << "2. Преподаватель\n"
-             << "3. Администратор\n"
-             << "4. Выход\n";
+        cout << "Who do you want to modify?\n"
+             << "1. Student\n"
+             << "2. Teacher\n"
+             << "3. Administrator\n"
+             << "4. Exit\n";
         cin >> command;
         
         switch (command) {
@@ -219,7 +219,7 @@ void Keeper::changeUniversity() {
                 system("cls");
                 universityList.print();
                 cout << endl;
-                cout << "Введите ФИО Студента: ";
+                cout << "Enter student's full name: ";
                 getline(cin, FIOstudent);
                 if (FIOstudent == "") {
                     getline(cin, FIOstudent);
@@ -241,7 +241,7 @@ void Keeper::changeUniversity() {
             case '2': {
                 system("cls");
                 universityList.print();
-                cout << "Введите ФИО преподавателя: ";
+                cout << "Enter teacher's full name: ";
                 getline(cin, FIOmentor);
                 if (FIOmentor == "") {
                     getline(cin, FIOmentor);
@@ -263,7 +263,7 @@ void Keeper::changeUniversity() {
             case '3': {
                 system("cls");
                 universityList.print();
-                cout << "Введите ФИО администратора: ";
+                cout << "Enter administrator's full name: ";
                 getline(cin, FIOadmin);
                 if (FIOadmin == "") {
                     getline(cin, FIOadmin);

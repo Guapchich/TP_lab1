@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 #include <iostream>
 #include <locale.h>
@@ -12,7 +11,7 @@ using namespace std;
 
 Student::Student(const Student& new_Student)
 {
-    cout << "Вызван конструктор копирования" << endl;
+    cout << "Copy constructor called" << endl;
     FIO = new_Student.FIO;
     group = new_Student.group;
     speciality = new_Student.speciality;
@@ -22,7 +21,7 @@ Student::Student(const Student& new_Student)
 
 Student::Student()
 {
-    cout << "Вызван конструктор по умолчанию c" << endl;
+    cout << "Default constructor called" << endl;
     this->FIO = "None";
     this->group = "None";
     this->speciality = "None";
@@ -32,7 +31,7 @@ Student::Student()
 
 Student::Student(string FIO, string group, string speciality, string course, string av_grad)
 {
-    cout << "Вызван конструктор" << endl;
+    cout << "Constructor called" << endl;
     this->FIO = FIO;
     this->group = group;
     this->speciality = speciality;
@@ -42,7 +41,7 @@ Student::Student(string FIO, string group, string speciality, string course, str
 
 Student::~Student()
 {
-    cout << "Вызван деструктор" << endl;
+    cout << "Destructor called" << endl;
 }
 
 void Student::setFIO(string FIO) { this->FIO = FIO; }
@@ -59,12 +58,12 @@ string Student::getAv() { return av_grad; }
 
 void Student::print()
 {
-    cout << "-----Студент-----" << endl;
-    cout << "ФИО: " << getFIO() << endl;
-    cout << "Группа: " << getGroup() << endl;
-    cout << "Специальность: " << getSpec() << endl;
-    cout << "Курс: " << getCourse() << endl;
-    cout << "Средний балл: " << getAv() << endl;
+    cout << "-----Student-----" << endl;
+    cout << "Full Name: " << getFIO() << endl;
+    cout << "Group: " << getGroup() << endl;
+    cout << "Specialty: " << getSpec() << endl;
+    cout << "Course: " << getCourse() << endl;
+    cout << "Average Grade: " << getAv() << endl;
 }
 
 void Student::input()
@@ -77,42 +76,40 @@ void Student::input()
     string nav_grad;
     double av_grad = 0;
 
-    cout << " Введите ФИО: " << endl;
+    cout << " Enter Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
     }
     setFIO(nFIO);
 
-    cout << "Введите Группу: " << endl;
+    cout << "Enter Group: " << endl;
     cin >> ngroup;
     setGroup(ngroup);
 
-    cout << "Введите Специальность: " << endl;
+    cout << "Enter Specialty: " << endl;
     getline(cin, nspeciality);
     if (nspeciality == "") {
         getline(cin, nspeciality);
     }
     setSpec(nspeciality);
 
-    cout << "Введите Курс: " << endl;
+    cout << "Enter Course: " << endl;
     cin >> ncourse;
     try {
         course = stoi(ncourse);
     } catch (std::invalid_argument) {
-        // Говорим, что можно вводить только числа
         std::cout << "Only numbers are allowed! \n";
     }
     if (course > 0) {
         setCourse(ncourse);
     }
 
-    cout << "Введите Средний балл: " << endl;
+    cout << "Enter Average Grade: " << endl;
     cin >> nav_grad;
     try {
         av_grad = stoi(nav_grad);
     } catch (std::invalid_argument) {
-        // Говорим, что можно вводить только числа
         std::cout << "Only numbers are allowed! \n";
     }
     if (av_grad > 0) {
@@ -130,8 +127,8 @@ void Student::change()
     string nav_grad;
     double av_grad = 0;
 
-    cout << " Для отмены изменения введите 'N'" << endl;
-    cout << " Введите новое ФИО: " << endl;
+    cout << " Enter 'N' to cancel changes" << endl;
+    cout << " Enter new Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
@@ -141,14 +138,14 @@ void Student::change()
         setFIO(nFIO);
     }
 
-    cout << "Введите новую Группу: " << endl;
+    cout << "Enter new Group: " << endl;
     cin >> ngroup;
     if (ngroup == "N") {
     } else {
         setGroup(ngroup);
     }
 
-    cout << "Введите новую Специальность: " << endl;
+    cout << "Enter new Specialty: " << endl;
     getline(cin, nspeciality);
     if (nspeciality == "") {
         getline(cin, nspeciality);
@@ -158,14 +155,13 @@ void Student::change()
         setSpec(nspeciality);
     }
 
-    cout << "Введите новый Курс: " << endl;
+    cout << "Enter new Course: " << endl;
     cin >> ncourse;
     if (ncourse == "N") {
     } else {
         try {
             course = stoi(ncourse);
         } catch (std::invalid_argument) {
-            // Говорим, что можно вводить только числа
             std::cout << "Only numbers are allowed! \n";
         }
         if (course > 0) {
@@ -173,14 +169,13 @@ void Student::change()
         }
     }
 
-    cout << "Введите новый Средний балл: " << endl;
+    cout << "Enter new Average Grade: " << endl;
     cin >> nav_grad;
     if (nav_grad == "N") {
     } else {
         try {
             av_grad = stoi(nav_grad);
         } catch (std::invalid_argument) {
-            // Говорим, что можно вводить только числа
             std::cout << "Only numbers are allowed! \n";
         }
         if (av_grad > 0) {
@@ -192,12 +187,12 @@ void Student::change()
 
 void Student::save(ofstream& file)
 {
-    file << "-----Студент-----" << endl;
-    file << "Имя: " << getFIO() << endl;
-    file << "Группа: " << getGroup() << endl;
-    file << "Специальность: " << getSpec() << endl;
-    file << "Курс: " << getCourse() << endl;
-    file << "Средний балл: " << getAv() << endl;
+    file << "-----Student-----" << endl;
+    file << "Name: " << getFIO() << endl;
+    file << "Group: " << getGroup() << endl;
+    file << "Specialty: " << getSpec() << endl;
+    file << "Course: " << getCourse() << endl;
+    file << "Average Grade: " << getAv() << endl;
 }
 
 void Student::load(ifstream& file)

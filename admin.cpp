@@ -1,4 +1,3 @@
-#pragma once
 #include <vector>
 #include <iostream>
 #include <locale.h>
@@ -12,7 +11,7 @@ using namespace std;
 
 Admin::Admin(const Admin& new_Admin)
 {
-    cout << "Вызван конструктор копирования" << endl;
+    cout << "Copy constructor called" << endl;
     FIO = new_Admin.FIO;
     work = new_Admin.work;
     number = new_Admin.number;
@@ -21,7 +20,7 @@ Admin::Admin(const Admin& new_Admin)
 
 Admin::Admin()
 {
-    cout << "Вызван конструктор по умолчанию а" << endl;
+    cout << "Default constructor called" << endl;
     this->FIO = "None";
     this->work = "None";
     this->number = "None";
@@ -30,7 +29,7 @@ Admin::Admin()
 
 Admin::Admin(string FIO, string work, string number, string response)
 {
-    cout << "Вызван конструктор" << endl;
+    cout << "Constructor called" << endl;
     this->FIO = FIO;
     this->work = work;
     this->number = number;
@@ -39,7 +38,7 @@ Admin::Admin(string FIO, string work, string number, string response)
 
 Admin::~Admin()
 {
-    cout << "Вызван деструктор" << endl;
+    cout << "Destructor called" << endl;
 }
 
 void Admin::setFIO(string FIO) { this->FIO = FIO; }
@@ -54,11 +53,11 @@ string Admin::getResponse() { return response; }
 
 void Admin::print()
 {
-    cout << "-----Админ-----" << endl;
-    cout << "ФИО: " << getFIO() << endl;
-    cout << "Должность: " << getWork() << endl;
-    cout << "Телефон: " << getNumber() << endl;
-    cout << "Область ответсвенности: " << getResponse() << endl;
+    cout << "-----Admin-----" << endl;
+    cout << "Full Name: " << getFIO() << endl;
+    cout << "Position: " << getWork() << endl;
+    cout << "Phone: " << getNumber() << endl;
+    cout << "Area of Responsibility: " << getResponse() << endl;
 }
 
 void Admin::input()
@@ -69,21 +68,21 @@ void Admin::input()
     int number = 0;
     string nresponse;
 
-    cout << " Введите ФИО: " << endl;
+    cout << " Enter Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
     }
     setFIO(nFIO);
 
-    cout << "Введите Должность: " << endl;
+    cout << "Enter Position: " << endl;
     getline(cin, nwork);
     if (nwork == "") {
         getline(cin, nwork);
     }
     setWork(nwork);
 
-    cout << "Введите Телефон: " << endl;
+    cout << "Enter Phone: " << endl;
     cin >> nnumber;
     try {
         number = stoi(nnumber);
@@ -95,7 +94,7 @@ void Admin::input()
         setNumber(nnumber);
     }
 
-    cout << "Введите Область ответственности: " << endl;
+    cout << "Enter Area of Responsibility: " << endl;
     getline(cin, nresponse);
     if (nresponse == "") {
         getline(cin, nresponse);
@@ -111,8 +110,8 @@ void Admin::change()
     string nresponse;
     int number = 0;
 
-    cout << " Для отмены изменения введите 'N'" << endl;
-    cout << " Введите новое ФИО: " << endl;
+    cout << " Enter 'N' to cancel changes" << endl;
+    cout << " Enter new Full Name: " << endl;
     getline(cin, nFIO);
     if (nFIO == "") {
         getline(cin, nFIO);
@@ -122,7 +121,7 @@ void Admin::change()
         setFIO(nFIO);
     }
 
-    cout << "Введите новую Должность: " << endl;
+    cout << "Enter new Position: " << endl;
     getline(cin, nwork);
     if (nwork == "") {
         getline(cin, nwork);
@@ -132,7 +131,7 @@ void Admin::change()
         setWork(nwork);
     }
 
-    cout << "Введите новый Телефон: " << endl;
+    cout << "Enter new Phone: " << endl;
     cin >> nnumber;
     if (nnumber == "N") {
     } else {
@@ -147,7 +146,7 @@ void Admin::change()
         }
     }
 
-    cout << "Введите новую Область ответственности: " << endl;
+    cout << "Enter new Area of Responsibility: " << endl;
     getline(cin, nresponse);
     if (nresponse == "") {
         getline(cin, nresponse);
@@ -161,11 +160,11 @@ void Admin::change()
 
 void Admin::save(ofstream& file)
 {
-    file << "-----Админ-----" << endl;
-    file << "Имя: " << getFIO() << endl;
-    file << "Группа: " << getWork() << endl;
-    file << "Специальность: " << getNumber() << endl;
-    file << "Курс: " << getResponse() << endl;
+    file << "-----Admin-----" << endl;
+    file << "Name: " << getFIO() << endl;
+    file << "Group: " << getWork() << endl;
+    file << "Specialty: " << getNumber() << endl;
+    file << "Course: " << getResponse() << endl;
 }
 
 void Admin::load(ifstream& file)
